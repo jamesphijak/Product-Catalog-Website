@@ -37,12 +37,11 @@ class CorsMiddleware
         //     res.header('Access-Control-Allow-Origin', ORIGIN)
         // }
 
-        
-           
         // Adds headers to the response
         $response->header('Access-Control-Allow-Methods', 'HEAD, GET, POST, PUT, PATCH, DELETE');
         $response->header('Access-Control-Allow-Headers', $request->header('Access-Control-Request-Headers'));
         
+        // Check in whitelist
         $cors_allow  = explode(',', env('CORS_ORIGIN_URL'));
         $cors = $request->header('Origin');
         if(in_array($cors, $cors_allow)){

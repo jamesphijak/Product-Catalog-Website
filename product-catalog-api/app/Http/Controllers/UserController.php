@@ -101,7 +101,7 @@ class UserController extends BaseController
      */
     protected function responseRequestSuccess($ret)
     {
-        return response()->json(['status' => 'success', 'data' => $ret], 200)
+        return response()->json(['status' => 'success', 'data' => $ret], 200);
     }
 
     /*
@@ -111,7 +111,7 @@ class UserController extends BaseController
      */
     protected function responseRequestError($message = 'Bad request', $statusCode = 200)
     {
-        return response()->json(['status' => 'error', 'error' => $message], $statusCode)
+        return response()->json(['status' => 'error', 'error' => $message], $statusCode);
     }
 
 }

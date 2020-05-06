@@ -46,7 +46,6 @@ $router->group(['prefix' => 'api/v1'], function ($router) {
         return response()->json(['cors_url' => $cors_allow, 'is_in' => $check]);
     });
 
-
     // Users
     $router->group(['prefix' => 'user'], function ($router) {
         $router->post('register', 'UserController@register');

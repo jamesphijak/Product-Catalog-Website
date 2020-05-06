@@ -17,15 +17,21 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->get('/key', function() {
-    return \Illuminate\Support\Str::random(32);
-});
 
-$router->get('/env', function() {
-    return $_ENV;
-});
+$router->group(['prefix' => 'api/v1'], function ($router) {
+    // Other
+    $router->get('/key', function() { return response()->json(['random_key' => \Illuminate\Support\Str::random(32)]); });
+    $router->get('/env', function() { return $_ENV; });
+    $router->get('/datetime', function() {
+        $datetime = explode(" ", Carbon\Carbon::now()->toDateTimeString());
+        return response()->json([
+            'date' => $datetime[0],
+            'time' => $datetime[1]    
+        ]);
+        
+    });
 
-$router->get('/datetime', function() {
-    $mytime = Carbon\Carbon::now();
-    return $mytime->toDateTimeString();
+    // Users
+    $router->post('user/register', 'UserController@register');
+    $router->post('user/login', ['uses' => 'UserController@login']);
 });
